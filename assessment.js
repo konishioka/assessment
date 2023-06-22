@@ -11,26 +11,40 @@ assessmentButton.onclick = () => {
   if (userName === 0) {
     return;
   };
-  
+
   resultDivision.innerText = '';
-  
-  const header = document.createElement('h3');
-  header.innerText = 'result';
-  resultDivision.appendChild(header);
-  
+
+
+  // headerDivision の作成
+  const headerDivision = document.createElement('div');
+  headerDivision.setAttribute('class', 'card-header');
+  headerDivision.innerText = '診断結果';
+
+  // bodyDivision の作成
+  const bodyDivision = document.createElement('div');
+  bodyDivision.setAttribute('class', 'card-body');
+
   const paragraph = document.createElement('p');
+  paragraph.setAttribute('class', 'card-text');
   const result = assessment(userName);
   paragraph.innerText = result;
-  resultDivision.appendChild(paragraph);
+  bodyDivision.appendChild(paragraph);
 
-  tweetDivision.innerText='';
+  // resultDivision に Bootstrap のスタイルを適用する
+  resultDivision.setAttribute('class', 'card');
+
+  // headerDivision と bodyDivision を resultDivision に差し込む
+  resultDivision.appendChild(headerDivision);
+  resultDivision.appendChild(bodyDivision);
+
+  tweetDivision.innerText = '';
   const anchor = document.createElement('a');
-  
+
   const hrefvalue = 'https://twitter.com/intent/tweet?button_hashtag=' + encodeURIComponent('あなたのいいところ') + '&ref_src=twsrc%5Etfw';
   anchor.setAttribute('href', hrefvalue);
   anchor.setAttribute('class', 'twitter-hashtag-button');
   anchor.setAttribute('data-text', result);
-  anchor.innerText = 'Tweet #あなたのいいところ';
+  anchor.innerText = 'Tweet #あなた のいいところ';
   tweetDivision.appendChild(anchor);
 
   const script = document.createElement('script');
